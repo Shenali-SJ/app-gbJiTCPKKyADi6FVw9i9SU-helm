@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '{{.Values.microservices.cartservice.serviceName}}'
+  labels:
+    app: '{{.Values.microservices.cartservice.serviceName}}'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: '{{.Values.microservices.cartservice.serviceName}}'
+  template:
+    metadata:
+      labels:
+        app: '{{.Values.microservices.cartservice.serviceName}}'
+    spec:
+      containers:
+      - name: '{{.Values.microservices.cartservice.serviceName}}'
+        image: '{{.Values.microservices.cartservice.dockerImage}}'
+        ports:
+        - containerPort: 8080
+        env:
+        - name: '{{.Values.microservices.cartservice.envs.DB_USERNAME.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.DB_USERNAME.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.DB_PASSWORD.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.DB_PASSWORD.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.MYSQL_ROOT_PASSWORD.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.MYSQL_ROOT_PASSWORD.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.MYSQL_DATABASE.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.MYSQL_DATABASE.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.DB_HOST.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.DB_HOST.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.DB_NAME.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.DB_NAME.name}}'
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            cpu: '{{.Values.microservices.cartservice.maxCPU}}'
+            memory: '{{.Values.microservices.cartservice.maxMemory}}'
