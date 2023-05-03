@@ -36,4 +36,4 @@ microservices:
       MYSQL_ROOT_PASSWORD:
         name: MYSQL_ROOT_PASSWORD
         value: root
-monitoring: false
+monitoring: true
