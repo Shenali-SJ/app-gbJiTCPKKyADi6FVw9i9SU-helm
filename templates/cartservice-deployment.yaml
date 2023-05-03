@@ -20,16 +20,6 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: '{{.Values.microservices.cartservice.envs.DB_USERNAME.name}}'
-          valueFrom:
-            configMapKeyRef:
-              name: '{{.Values.microservices.cartservice.serviceName}}'
-              key: '{{.Values.microservices.cartservice.envs.DB_USERNAME.name}}'
-        - name: '{{.Values.microservices.cartservice.envs.DB_PASSWORD.name}}'
-          valueFrom:
-            configMapKeyRef:
-              name: '{{.Values.microservices.cartservice.serviceName}}'
-              key: '{{.Values.microservices.cartservice.envs.DB_PASSWORD.name}}'
         - name: '{{.Values.microservices.cartservice.envs.MYSQL_ROOT_PASSWORD.name}}'
           valueFrom:
             configMapKeyRef:
@@ -50,6 +40,16 @@ spec:
             configMapKeyRef:
               name: '{{.Values.microservices.cartservice.serviceName}}'
               key: '{{.Values.microservices.cartservice.envs.DB_NAME.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.DB_USERNAME.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.DB_USERNAME.name}}'
+        - name: '{{.Values.microservices.cartservice.envs.DB_PASSWORD.name}}'
+          valueFrom:
+            configMapKeyRef:
+              name: '{{.Values.microservices.cartservice.serviceName}}'
+              key: '{{.Values.microservices.cartservice.envs.DB_PASSWORD.name}}'
         resources:
           requests:
             cpu: 100m

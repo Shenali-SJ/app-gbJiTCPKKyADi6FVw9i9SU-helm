@@ -2,6 +2,9 @@ appName: cart
 version: 1.0.0
 hostName: example.test
 clusterURL: https://kubernetes.default.svc
+clusterIPs:
+- 800.800.900
+- 790.890,789
 microservices:
   cartservice:
     serviceName: cartservice
@@ -33,3 +36,4 @@ microservices:
       MYSQL_ROOT_PASSWORD:
         name: MYSQL_ROOT_PASSWORD
         value: root
+monitoring: false
